@@ -10,7 +10,7 @@ This is a straightforward job application tracking system that demonstrates basi
 
 - **Framework**: Next.js 16 (React 19)
 - **Language**: TypeScript
-- **Database**: PostgreSQL with Prisma ORM
+- **Database**: Supabase PostgreSQL with Prisma ORM
 - **Authentication**: JWT-based authentication with bcryptjs password hashing
 - **Styling**: Tailwind CSS
 - **UI Components**: Radix UI primitives (Card, Badge, Input, etc.)
@@ -94,7 +94,7 @@ job-tracker/
 
 ## 🗄️ Database Schema
 
-The application uses PostgreSQL with the following schema:
+The application uses Supabase PostgreSQL with the following schema:
 
 **User Model:**
 - id, email (unique), name, passwordHash
@@ -186,28 +186,35 @@ Basic testing setup for authentication utilities and helper functions.
 
 ## 🚀 Deployment
 
-The application is deployed to Netlify with CI/CD automation:
+The application is deployed to Netlify.
 
-### Deployment Steps
-1. **Configure environment variables** in Netlify project settings
-2. **Set up PostgreSQL database** (Neon, Supabase, or external)
-3. **Deploy**: Connect GitHub repository to Netlify
-4. **Environment variables**: Add DATABASE_URL, JWT_SECRET, COHERE_API_KEY
-5. **Database migrations**: Run `npx prisma db push` after deployment
+### Manual Deployment
+The application was manually deployed to Netlify using the Next.js Runtime. The deployment process involved:
+1. Connecting the GitHub repository to Netlify
+2. Configuring environment variables (DATABASE_URL, JWT_SECRET, COHERE_API_KEY)
+3. Setting up the Supabase PostgreSQL database connection
+4. Running database migrations with Prisma
 
 ### CI/CD Configuration
-- **GitHub Actions Workflow**: Automated deployment on push to main branch
-- **Build Process**: Runs tests and builds application before deployment
-- **Environment Variables**: Secure environment variable management
-- **Pull Request Deployment**: Automatic deployment preview for PRs
-- **Production Deployment**: Automatic deployment to production on main branch
+A GitHub Actions workflow is configured in `.github/workflows/deploy.yml` but is not actively used since deployment is handled manually. The workflow includes:
+- Automated testing before deployment
+- Build process with environment variables
+- Netlify deployment integration
+- Pull request deployment previews
 
-### CI/CD Features
+### Environment Variables
+The following environment variables are configured in Netlify:
+- `DATABASE_URL`: Supabase PostgreSQL connection string
+- `DIRECT_URL`: Direct database connection for migrations
+- `JWT_SECRET`: Secret key for JWT authentication
+- `COHERE_API_KEY`: API key for Cohere AI integration
+
+### CI/CD Features (Configured but Not Active)
 - Automated testing before deployment
 - Build optimization and error handling
 - Deployment status notifications
-- Rollback capabilities
 - Environment-specific configurations
+- Pull request deployment previews
 
 ## 🛡️ Security Considerations
 
